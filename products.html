@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Products · Hope, Inc. ERP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="products.css">
+</head>
+<body class="app">
+  <aside class="sidebar">
+    <a class="brand light" href="index.html#dashboard"><span class="logo">H</span> Hope, Inc. ERP</a>
+    <small>MODULES</small>
+    <a href="index.html#dashboard">Dashboard</a>
+    <a href="customers.html">Customers</a>
+    <a href="products.html" class="on">Products</a>
+    <a class="soon">Human Resources</a>
+    <a class="soon">Sales</a>
+    <a class="soon">Reports</a>
+    <small>ADMINISTRATION</small>
+    <a class="soon">User Management</a>
+    <em>Prototype · sample data</em>
+  </aside>
+
+  <div class="content">
+    <header class="top">
+      <div><small id="crumb">Products</small><b id="pageTitle">Products</b></div>
+      <div class="who"><span class="role" id="role"></span> <span id="uname"></span> <button class="btn btn-light" id="out">Sign out</button></div>
+    </header>
+
+    <main>
+      <div class="toast" id="toast" role="status"></div>
+
+      <!-- LIST -->
+      <section id="listView">
+        <div class="head">
+          <div><h2>Products</h2><p class="sub">Browse the catalogue. Current price comes from each product’s price history.</p></div>
+          <a class="btn btn-dark admin-only" href="#add">+ Add Product</a>
+        </div>
+        <div class="filters">
+          <input id="q" type="text" placeholder="Search name, code or SKU…">
+          <select id="fCat"><option value="All">Category: All</option><option>Hardware</option><option>Consumables</option><option>Safety Gear</option><option>Electrical</option></select>
+          <select id="fStatus"><option value="All">Status: All</option><option value="Active">Status: Active</option><option value="Inactive">Status: Inactive</option></select>
+          <select id="fSort"><option value="az">Sort: Name A–Z</option><option value="za">Sort: Name Z–A</option><option value="lo">Sort: Price low–high</option><option value="hi">Sort: Price high–low</option></select>
+        </div>
+        <p class="count"><span id="countText"></span> <button class="link-btn" id="clear">Clear filters</button></p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Product name</th><th>SKU</th><th>Category</th><th>Price</th><th>Unit</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <div class="empty" id="empty" hidden><b id="emptyTitle">No products found</b><p>Check the spelling, or search by product code or SKU.</p></div>
+      </section>
+
+      <!-- DETAILS (with price history) -->
+      <section id="detailView" hidden></section>
+
+      <!-- ADD / EDIT PRODUCT -->
+      <section id="formView" hidden>
+        <h2 id="formTitle"></h2>
+        <p class="sub" id="formSub"></p>
+        <form id="prodForm" class="panel" novalidate>
+          <p class="error summary" id="summary"></p>
+          <h3>Product information</h3>
+          <label for="fName">Product name *</label>
+          <input id="fName" type="text" placeholder="Enter product name">
+          <p class="error" id="nameErr"></p>
+          <div class="two">
+            <div><label>Product code</label><input id="fCode" type="text" disabled></div>
+            <div><label for="fSku">SKU *</label><input id="fSku" type="text" placeholder="e.g. LO-5L300"><p class="error" id="skuErr"></p></div>
+          </div>
+          <div class="two">
+            <div><label for="fCat2">Category *</label>
+              <select id="fCat2"><option value="">Select category</option><option>Hardware</option><option>Consumables</option><option>Safety Gear</option><option>Electrical</option></select>
+              <p class="error" id="catErr"></p></div>
+            <div><label for="fUnit">Unit *</label>
+              <select id="fUnit"><option value="">Select unit</option><option>pcs</option><option>can</option><option>pair</option><option>meter</option></select>
+              <p class="error" id="unitErr"></p></div>
+          </div>
+          <h3>Pricing</h3>
+          <div id="newPrice">
+            <small class="hint">Optional. You can also add prices later from the product’s price history.</small>
+            <div class="two">
+              <div><label for="fPrice">Initial price (USD)</label><input id="fPrice" type="number" step="0.01" min="0" placeholder="0.00"></div>
+              <div><label for="fDate">Effective date</label><input id="fDate" type="date"></div>
+            </div>
+            <p class="error" id="priceErr"></p>
+          </div>
+          <div id="editPrice" hidden><small class="hint">Prices are managed in the price history, not on this form.</small>
+            <p>Current price <b id="curPrice"></b> · <a class="link" id="manage" href="#">Manage price history</a></p></div>
+          <h3>Status</h3>
+          <small class="hint">Inactive products are hidden from standard users.</small>
+          <select id="fStat"><option>Active</option><option>Inactive</option></select>
+          <div class="actions">
+            <button class="btn btn-dark" type="submit">Save product</button>
+            <a class="btn btn-light" href="#list">Cancel</a>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script src="products.js"></script>
+</body>
+</html>
