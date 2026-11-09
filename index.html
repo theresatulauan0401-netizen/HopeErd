@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hope, Inc. ERP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- LANDING -->
+  <section class="view" id="home">
+    <header class="topbar">
+      <a class="brand" href="#home"><span class="logo">H</span> Hope, Inc. ERP</a>
+      <nav><a class="link" href="#signin">Sign In</a> <a class="btn btn-dark" href="#register">Register</a></nav>
+    </header>
+    <main class="hero">
+      <div>
+        <span class="pill">Enterprise Resource Planning</span>
+        <h1>One system for your whole business</h1>
+        <p>Hope, Inc. ERP brings Customers, Products, Human Resources and Sales into a single place, with reports, role-based access and a clear audit trail.</p>
+        <a class="btn btn-dark" href="#signin">Sign In to Dashboard</a>
+        <a class="btn btn-light" href="#register">Register</a>
+      </div>
+      <div class="preview">
+        <div class="preview-bar">Hope, Inc. ERP — Dashboard</div>
+        <div class="grid" id="moduleGridPreview"></div>
+      </div>
+    </main>
+    <footer class="foot">Six modules · Three roles · One unified system</footer>
+  </section>
+
+  <!-- SIGN IN -->
+  <section class="view auth" id="signin">
+    <a class="brand center" href="#home"><span class="logo">H</span> Hope, Inc. ERP</a>
+    <div class="card">
+      <h2>Welcome back</h2>
+      <p class="sub">Sign in to your Hope, Inc. ERP account</p>
+      <form id="signinForm" novalidate>
+        <label for="siEmail">Email address</label>
+        <input id="siEmail" type="email" placeholder="you@hopeinc.com" autocomplete="email">
+        <p class="error" id="siEmailErr"></p>
+
+        <label for="siPass">Password</label>
+        <div class="pw">
+          <input id="siPass" type="password" placeholder="Enter your password" autocomplete="current-password">
+          <button type="button" class="eye" data-target="siPass" aria-label="Show password">👁</button>
+        </div>
+        <p class="error" id="siPassErr"></p>
+
+        <div class="row">
+          <label class="check"><input type="checkbox" id="remember"> Remember me</label>
+          <a class="link" href="#reset">Forgot password?</a>
+        </div>
+        <button class="btn btn-dark full" type="submit">Sign In</button>
+      </form>
+      <div class="or"><span>or</span></div>
+      <button class="btn btn-light full" id="googleBtn" type="button"><b class="g">G</b> Continue with Google</button>
+      <p class="switch">Don’t have an account? <a class="link" href="#register">Register</a></p>
+      <div class="proto">
+        <small>Prototype only — sign in as:</small>
+        <div>
+          <button class="chip" data-role="Superadmin" data-name="Michael Chen">Superadmin</button>
+          <button class="chip" data-role="Admin" data-name="Lisa Park">Admin</button>
+          <button class="chip" data-role="User" data-name="Alex Rivera">User</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTER -->
+  <section class="view auth" id="register">
+    <a class="brand center" href="#home"><span class="logo">H</span> Hope, Inc. ERP</a>
+    <div class="card">
+      <h2>Create your account</h2>
+      <p class="sub">Join Hope, Inc. ERP</p>
+      <div class="note">New accounts are created with the default User role. Admin and Superadmin roles can only be assigned by an existing administrator.</div>
+      <form id="registerForm" novalidate>
+        <div class="two">
+          <div><label for="rgFirst">First name</label><input id="rgFirst" type="text" autocomplete="given-name"></div>
+          <div><label for="rgLast">Last name</label><input id="rgLast" type="text" autocomplete="family-name"></div>
+        </div>
+        <label for="rgEmail">Email address</label>
+        <input id="rgEmail" type="email" autocomplete="email">
+        <p class="error" id="rgEmailErr"></p>
+        <label for="rgPass">Password</label>
+        <div class="pw"><input id="rgPass" type="password" autocomplete="new-password"><button type="button" class="eye" data-target="rgPass" aria-label="Show password">👁</button></div>
+        <label for="rgConfirm">Confirm password</label>
+        <div class="pw"><input id="rgConfirm" type="password" autocomplete="new-password"><button type="button" class="eye" data-target="rgConfirm" aria-label="Show password">👁</button></div>
+        <p class="error" id="rgErr"></p>
+        <button class="btn btn-dark full" type="submit">Register</button>
+      </form>
+      <div class="or"><span>or</span></div>
+      <button class="btn btn-light full" id="googleBtn2" type="button"><b class="g">G</b> Continue with Google</button>
+      <p class="switch">Already have an account? <a class="link" href="#signin">Sign in</a></p>
+    </div>
+  </section>
+
+  <!-- RESET PASSWORD -->
+  <section class="view auth" id="reset">
+    <a class="brand center" href="#home"><span class="logo">H</span> Hope, Inc. ERP</a>
+    <div class="card">
+      <h2>Reset password</h2>
+      <p class="sub">We’ll send you a secure link to reset it</p>
+      <form id="resetForm" novalidate>
+        <label for="rsEmail">Email address</label>
+        <input id="rsEmail" type="email" autocomplete="email">
+        <p class="error" id="rsErr"></p>
+        <button class="btn btn-dark full" type="submit">Send Reset Link</button>
+      </form>
+      <p class="switch">Remember your password? <a class="link" href="#signin">Back to Sign In</a></p>
+    </div>
+  </section>
+
+  <!-- CHECK YOUR EMAIL -->
+  <section class="view auth" id="sent">
+    <a class="brand center" href="#home"><span class="logo">H</span> Hope, Inc. ERP</a>
+    <div class="card centered">
+      <h2>Check your email</h2>
+      <p class="sub">We sent a secure reset link to <b id="sentEmail"></b>. The link expires after a short time.</p>
+      <div class="success">Reset link sent</div>
+      <a class="btn btn-dark full" href="#signin">Back to Sign In</a>
+    </div>
+  </section>
+
+  <!-- DASHBOARD (prototype stub) -->
+  <section class="view" id="dashboard">
+    <header class="topbar">
+      <a class="brand" href="#dashboard"><span class="logo">H</span> Hope, Inc. ERP</a>
+      <nav><span class="user"><b id="dashRole"></b> <span id="dashName"></span></span> <button class="btn btn-light" id="signOut">Sign out</button></nav>
+    </header>
+    <main class="dash">
+      <h2 id="dashWelcome"></h2>
+      <p class="sub">Choose a module to get started.</p>
+      <div class="grid big" id="moduleGrid"></div>
+    </main>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
