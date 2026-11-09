@@ -16,6 +16,13 @@ function renderModules(containerId) {
 renderModules("moduleGridPreview");
 renderModules("moduleGrid");
 
+// the Customers card opens the Customers module (other modules come later)
+document.querySelectorAll("#moduleGrid .mod").forEach(card => {
+  if (card.querySelector("b").textContent === "Customers") {
+    card.addEventListener("click", () => { location.href = "customers.html"; });
+  }
+});
+
 // ---------- Simple "router": show the section that matches the URL hash ----------
 const VIEWS = ["home", "signin", "register", "reset", "sent", "dashboard"];
 
