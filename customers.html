@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Customers · Hope, Inc. ERP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body class="app">
+  <aside class="sidebar">
+    <a class="brand light" href="index.html#dashboard"><span class="logo">H</span> Hope, Inc. ERP</a>
+    <small>MODULES</small>
+    <a href="index.html#dashboard">Dashboard</a>
+    <a href="customers.html" class="on">Customers</a>
+    <a class="soon">Products</a>
+    <a class="soon">Human Resources</a>
+    <a class="soon">Sales</a>
+    <a class="soon">Reports</a>
+    <small>ADMINISTRATION</small>
+    <a class="soon">User Management</a>
+    <em>Prototype · sample data</em>
+  </aside>
+
+  <div class="content">
+    <header class="top">
+      <div><small id="crumb">Customers</small><b id="pageTitle">Customers</b></div>
+      <div class="who"><span class="role" id="role"></span> <span id="uname"></span> <button class="btn btn-light" id="out">Sign out</button></div>
+    </header>
+
+    <main>
+      <div class="toast" id="toast" role="status"></div>
+
+      <!-- LIST -->
+      <section id="listView">
+        <div class="head">
+          <div><h2>Customers</h2><p class="sub">Find, review and maintain customer accounts.</p></div>
+          <a class="btn btn-dark admin-only" href="#add">+ Add Customer</a>
+        </div>
+        <div class="filters">
+          <input id="q" type="text" placeholder="Search name, number or contact…">
+          <select id="fStatus"><option value="Active">Status: Active</option><option value="Inactive">Status: Inactive</option><option value="All">Status: All</option></select>
+          <select id="fTerms"><option value="All">Terms: All</option><option>Net 15</option><option>Net 30</option><option>Net 45</option><option>COD</option></select>
+          <select id="fSort"><option value="az">Sort: Name A–Z</option><option value="za">Sort: Name Z–A</option><option value="no">Sort: Cust No</option></select>
+        </div>
+        <p class="count"><span id="countText"></span> <button class="link-btn" id="clear">Clear filters</button></p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Cust No</th><th>Customer name</th><th>Contact person</th><th>Phone</th><th>Terms</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <div class="empty" id="empty" hidden><b>No customers found</b><p>Nothing matches your search or filters. Try a different search or clear the filters.</p></div>
+      </section>
+
+      <!-- DETAILS -->
+      <section id="detailView" hidden></section>
+
+      <!-- ADD / EDIT -->
+      <section id="formView" hidden>
+        <h2 id="formTitle"></h2>
+        <p class="sub" id="formSub"></p>
+        <form id="custForm" class="panel" novalidate>
+          <h3>Customer information</h3>
+          <label>Customer no.</label>
+          <input id="fNo" type="text" disabled>
+          <small class="hint" id="noHint"></small>
+          <label for="fName">Customer name *</label>
+          <input id="fName" type="text" placeholder="Enter customer name">
+          <p class="error" id="nameErr"></p>
+          <label for="fAddr">Address</label>
+          <input id="fAddr" type="text" placeholder="Street, city">
+          <label for="fPay">Payment terms</label>
+          <select id="fPay"><option value="">Select payment terms</option><option>Net 15</option><option>Net 30</option><option>Net 45</option><option>COD</option></select>
+          <h3>Contact details</h3>
+          <div class="two">
+            <div><label for="fContact">Contact person</label><input id="fContact" type="text" placeholder="Full name"></div>
+            <div><label for="fPhone">Phone</label><input id="fPhone" type="text" placeholder="(555) 000-0000"></div>
+          </div>
+          <label for="fEmail">Email</label>
+          <input id="fEmail" type="email" placeholder="name@company.com">
+          <p class="error" id="emailErr"></p>
+          <h3>Account status</h3>
+          <small class="hint">Inactive customers are hidden from standard users.</small>
+          <select id="fStat"><option>Active</option><option>Inactive</option></select>
+          <div class="actions">
+            <button class="btn btn-dark" type="submit">Save customer</button>
+            <a class="btn btn-light" href="#list" id="cancel">Cancel</a>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script src="customers.js"></script>
+</body>
+</html>
