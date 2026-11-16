@@ -60,8 +60,7 @@ python run_migrations.py --test
 
 ## Superadmin accounts
 Migration 006 creates one superadmin per team member, each with the temporary password
-`ChangeMe!2026` (stored only as a bcrypt hash). **Edit the team list in
-`migrations/006_seed_users_modules_rights.sql` (names and emails) before the first run**, and change
+`ChangeMe!2026` (stored only as a bcrypt hash). and change
 the password after first login.
 
 ## Soft delete and the audit trail
@@ -87,11 +86,6 @@ FROM audit_log ORDER BY audit_id DESC LIMIT 5;
 `audit_user()` returns that account's e-mail, and `audit_log.action_by_user_id` holds the id.
 If nothing was set (migrations, manual SQL in pgAdmin) it falls back to the database login, such as `postgres`.
 The database cannot verify the id by itself: your backend must be the only thing that connects to it.
-
-## Rules for changing the database
-- **Never edit a migration that is already merged.** Add a new numbered file, such as `007_add_payment_screen.sql`.
-- Work on a branch and open a pull request.
-- Run `python run_migrations.py --test` before you commit.
 
 ## Troubleshooting
 - **connection refused**: PostgreSQL isn't running, or the port in `.env` is wrong.
