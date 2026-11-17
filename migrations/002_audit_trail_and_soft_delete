@@ -1,0 +1,25 @@
+- 002: Audit trail + soft delete, exactly as in HopeDB_audit.sql.
+-- Adds is_deleted + stamp to the 10 Hope tables, audit_log, triggers, and <table>_active views.
+
+-- =====================================================================
+-- AUDIT TRAIL + SOFT DELETE  (standard PostgreSQL)
+-- Everything below runs AFTER all the data above has been loaded.
+--   * every table gets:  is_deleted (soft delete flag)  and  stamp
+--   * stamp looks like:  EDIT user1 2026-10-12 11:18 AM
+--       (ADD / EDIT / DELETE / RESTORE  +  user  +  date  +  time)
+--   * audit_log keeps the full history (old and new values)
+--   * hard DELETE and TRUNCATE are blocked on every table
+--   * <table>_active views show only rows where is_deleted = false
+-- =====================================================================
+
+-- 1. Central audit table ------------------------------------------------
+CREATE TABLE audit_log (
+    audit_id    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    table_name  VARCHAR(30) NOT NULL,
+    action      VARCHAR(7)  NOT NULL CHECK (action IN ('ADD','EDIT','DELETE','RESTORE')),
+    record_key  VARCHAR(60),             -- primary key value(s), joined with '|'
+    old_values  JSONB,                   -- NULL for ADD
+    new_values  JSONB,
+    action_by   VARCHAR(50) NOT NULL,
+    action_at   TIMESTAMPTZ NOT NULL DEFAULT now()
+);
